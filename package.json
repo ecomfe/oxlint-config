@@ -1,0 +1,43 @@
+{
+  "name": "@ecomfe/oxlint-config",
+  "version": "1.0.0",
+  "description": "Oxlint config for Baidu EFE (migrated from @ecomfe/eslint-config)",
+  "type": "module",
+  "repository": "ecomfe/oxlint-config",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "prepare": "[ -d .git ] && husky || true",
+    "build": "rm -rf dist && tsc --project tsconfig.build.json",
+    "watch": "tsc --project tsconfig.build.json --watch",
+    "test": "node tests/run.mjs",
+    "audit": "node scripts/coverage-audit.mjs"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "oxlint": ">=1.56.0"
+  },
+  "keywords": [
+    "oxlint",
+    "lint",
+    "config",
+    "ecomfe",
+    "baidu"
+  ],
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "oxlint": "^1.56.0",
+    "typescript": "^6.0.2"
+  }
+}
