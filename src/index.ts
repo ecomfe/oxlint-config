@@ -1,4 +1,4 @@
-import {type OxlintConfig} from 'oxlint';
+import type {OxlintConfig} from 'oxlint';
 import {createBaseConfig, type BaseConfigOptions} from './base.js';
 import {createImportConfig, type ImportConfigOptions} from './import.js';
 import {createReactConfig, type ReactConfigOptions} from './react.js';

@@ -11,8 +11,8 @@ import {writeFileSync, mkdirSync} from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {
-    configure,
     createBaseConfig,
+    createImportConfig,
     createTypeScriptConfig,
     createReactConfig,
 } from '../dist/index.js';
@@ -31,6 +31,7 @@ mkdirSync(TEST_CONFIGS, {recursive: true});
 const configs = {
     'base.json': createBaseConfig(),
     'base-strict.json': createBaseConfig({strict: true}),
+    'import.json': createImportConfig(),
     'typescript.json': createTypeScriptConfig(),
     'typescript-strict.json': createTypeScriptConfig({strict: true}),
     'react.json': createReactConfig(),
@@ -122,6 +123,37 @@ function shouldPass(name, config, file, ruleCode) {
 
 // ─── Test Suites ──────────────────────────────────────────────────────────────
 
+// ── Import rules ──────────────────────────────────────────────────────────────
+console.log('\n📦 Import rules\n');
+
+shouldFail(
+    'import/no-duplicates: 同一库的普通 import 重复应报错',
+    path.join(TEST_CONFIGS, 'import.json'),
+    'import/fail/no-duplicates.ts',
+    'eslint-plugin-import(no-duplicates)'
+);
+
+shouldFail(
+    'import/no-duplicates: 多行 import type 来自同一库应报错（需要合并）',
+    path.join(TEST_CONFIGS, 'import.json'),
+    'import/fail/no-duplicates-multi-type.ts',
+    'eslint-plugin-import(no-duplicates)'
+);
+
+shouldPass(
+    'import/no-duplicates: import type 合并为单行不应 warn',
+    path.join(TEST_CONFIGS, 'import.json'),
+    'import/pass/no-duplicates-type-merged-ok.ts',
+    'eslint-plugin-import(no-duplicates)'
+);
+
+shouldPass(
+    'import/no-duplicates: 普通 import 与 import type 来自同一库不应 warn',
+    path.join(TEST_CONFIGS, 'import.json'),
+    'import/pass/no-duplicates-type-coexist.ts',
+    'eslint-plugin-import(no-duplicates)'
+);
+
 // ── Base rules ────────────────────────────────────────────────────────────────
 console.log('\n📦 Base rules\n');
 
@@ -179,6 +211,20 @@ shouldPass(
     path.join(TEST_CONFIGS, 'base.json'),
     'base/pass/no-use-before-define-vars-ok.ts',
     'eslint(no-use-before-define)'
+);
+
+shouldPass(
+    'no-duplicate-imports [off]: 普通 import 与 import type 来自同一库不应 warn',
+    path.join(TEST_CONFIGS, 'base.json'),
+    'base/pass/no-duplicate-imports-type-ok.ts',
+    'eslint(no-duplicate-imports)'
+);
+
+shouldPass(
+    'no-duplicate-imports [off]: 规则已关闭，纯普通 import 重复也不触发内置规则',
+    path.join(TEST_CONFIGS, 'base.json'),
+    'base/pass/no-duplicate-imports-value-ok.ts',
+    'eslint(no-duplicate-imports)'
 );
 
 // ── Base strict rules ─────────────────────────────────────────────────────────

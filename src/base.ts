@@ -1,4 +1,4 @@
-import {type OxlintConfig} from 'oxlint';
+import type {OxlintConfig} from 'oxlint';
 
 export interface BaseConfigOptions {
     strict?: boolean;
@@ -63,7 +63,7 @@ export function createBaseConfig(options: BaseConfigOptions = {}): OxlintConfig 
             'no-dupe-else-if': 'error',
             'no-dupe-keys': 'warn',
             'no-duplicate-case': 'error',
-            'no-duplicate-imports': 'warn',
+            'no-duplicate-imports': 'off',
             'no-else-return': 'warn',
             'no-empty': 'off',
             'no-empty-character-class': 'error',
