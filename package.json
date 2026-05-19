@@ -1,6 +1,6 @@
 {
   "name": "@ecomfe/oxlint-config",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Oxlint config for Baidu EFE (migrated from @ecomfe/eslint-config)",
   "type": "module",
   "repository": "ecomfe/oxlint-config",

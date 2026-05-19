@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/ecomfe/oxlint-config/compare/v1.0.0...v1.0.1) (2026-05-19)
+
+
+### Bug Fixes
+
+* add missing prepublishOnly script ([9f648f5](https://github.com/ecomfe/oxlint-config/commit/9f648f5bc3fbe095b923f940dbd4c92677f5105c))
+
 ## 1.0.0 (2026-04-01)
 
 
