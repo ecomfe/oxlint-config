@@ -20,7 +20,8 @@
     "build": "rm -rf dist && tsc --project tsconfig.build.json",
     "watch": "tsc --project tsconfig.build.json --watch",
     "test": "node tests/run.mjs",
-    "audit": "node scripts/coverage-audit.mjs"
+    "audit": "node scripts/coverage-audit.mjs",
+    "prepublishOnly": "npm run build"
   },
   "publishConfig": {
     "access": "public"
